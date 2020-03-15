@@ -15,6 +15,8 @@
 #include "sensor.h"
 #include "bmp180.h"
 
+#define PKG_USING_BMP180
+
 #ifdef PKG_USING_BMP180
 
 #define BMP180_ADDR				0x77 	/* i2c slave address */
@@ -382,9 +384,9 @@ __exit:
 		rt_free(sensor_baro);
 	}
 	
-	if(sensor_baro)
+	if(sensor_temp)
 	{
-		rt_free(sensor_baro);
+		rt_free(sensor_temp);
 	}
 	
     if(module)

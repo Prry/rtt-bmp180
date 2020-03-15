@@ -19,7 +19,8 @@ static void read_baro_entry(void *parameter)
     rt_device_t baro_dev = RT_NULL, temp_dev = RT_NULL;
     struct rt_sensor_data baro_data,temp_data;
     rt_size_t res0 = 0, res1 = 1;
-
+	rt_uint8_t chip_id;
+	
     baro_dev = rt_device_find("baro_bmp180");
     if (baro_dev == RT_NULL)
     {
@@ -48,8 +49,10 @@ static void read_baro_entry(void *parameter)
 	
 	rt_device_control(baro_dev, RT_SENSOR_CTRL_SET_ODR, (void *)(1));/* 1Hz read */
     rt_device_control(temp_dev, RT_SENSOR_CTRL_SET_ODR, (void *)(1));/* 1Hz read */
-
-    while (1)
+	
+	rt_device_control(temp_dev, RT_SENSOR_CTRL_GET_ID, (void*)&chip_id);
+	rt_kprintf("bmp180 chip ID [0x%X]\n", chip_id);
+	while (1)
     {
         res0 = rt_device_read(baro_dev, 0, &baro_data, 1);
 		res0 = rt_device_read(temp_dev, 0, &temp_data, 1);
