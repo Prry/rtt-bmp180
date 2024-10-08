@@ -12,7 +12,6 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <rtdbg.h>
-#include "sensor.h"
 #include "bmp180.h"
 
 #define PKG_USING_BMP180
@@ -222,7 +221,7 @@ static rt_size_t bmp180_polling_get_data(rt_sensor_t psensor, struct rt_sensor_d
     return 1;
 }
 
-static rt_size_t bmp180_fetch_data(struct rt_sensor_device *psensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE bmp180_fetch_data(struct rt_sensor_device *psensor, void *buf, rt_size_t len)
 {
     RT_ASSERT(buf);
 	RT_ASSERT(psensor);
