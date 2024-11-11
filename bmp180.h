@@ -12,7 +12,16 @@
 #ifndef _BMP180_H_
 #define _BMP180_H_
 
-#include "sensor.h"
+#include <rtthread.h>
+#include <rtdevice.h>
+
+#if defined(RT_VERSION_CHECK)
+    #if (RTTHREAD_VERSION >= RT_VERSION_CHECK(5, 0, 2))
+        #define RT_SIZE_TYPE   rt_ssize_t
+    #else
+        #define RT_SIZE_TYPE   rt_size_t
+    #endif
+#endif
 
 extern int rt_hw_bmp180_init(const char *name, struct rt_sensor_config *cfg);
 
